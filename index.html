@@ -121,6 +121,9 @@ textarea:focus,input:focus{outline:2px solid var(--clay);outline-offset:0;border
 .day{min-width:0;min-height:56px;padding:4px 0;border-radius:10px;border:1px solid var(--line);background:var(--card);text-decoration:none;color:inherit;
   display:flex;flex-direction:column;align-items:center;justify-content:center;font-size:13px;position:relative}
 .day b{font-size:16px}
+.day span{font-size:12px}
+button.day{font:inherit;padding:4px 0;cursor:pointer;-webkit-tap-highlight-color:transparent}
+.mod .arrow{color:var(--muted);flex:none}
 .day.logged{background:var(--moss-soft);border-color:var(--moss)}
 .day.today{outline:2px solid var(--clay);outline-offset:1px}
 .day .pips{display:flex;gap:2px;margin-top:2px}
@@ -154,7 +157,7 @@ nav.tabbar svg{width:24px;height:24px;stroke:currentColor;fill:none;stroke-width
 <main id="app" aria-live="polite"></main>
 <div class="saved" id="saved">Saved on this device</div>
 <nav class="tabbar" aria-label="Main">
-  <a href="#/" data-tab="home"><svg viewBox="0 0 24 24"><path d="M3 11l9-7 9 7v9a1 1 0 0 1-1 1h-5v-6h-6v6H4a1 1 0 0 1-1-1z"/></svg>Program</a>
+  <a href="#/" data-tab="home"><svg viewBox="0 0 24 24"><path d="M3 11l9-7 9 7v9a1 1 0 0 1-1 1h-5v-6h-6v6H4a1 1 0 0 1-1-1z"/></svg>Home</a>
   <a href="#/today" data-tab="today"><svg viewBox="0 0 24 24"><circle cx="12" cy="13" r="4"/><path d="M12 3v3M4.2 7.2l2 2M19.8 7.2l-2 2M2 17h20M5 21h14"/></svg>Today</a>
   <a href="#/tracker" data-tab="tracker"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="17" rx="2"/><path d="M3 9h18M8 2v4M16 2v4"/></svg>Tracker</a>
   <a href="#/help" data-tab="help"><svg viewBox="0 0 24 24"><path d="M12 21s-7-4.5-9.5-9A5.5 5.5 0 0 1 12 6a5.5 5.5 0 0 1 9.5 6c-2.5 4.5-9.5 9-9.5 9z"/></svg>Support</a>
@@ -345,6 +348,101 @@ const MODULES = [
  ]}
 ];
 
+/* ---------- Second program: Foundations of Wellness, Earth Element (summarised from Kajabi) ----------
+   Videos and meditations stay behind the Kajabi member login; each lesson links there. */
+const KAJABI = 'https://www.charlieabra.com/products/the-foundations-of-wellness-program-earth-element/categories/';
+const EARTH = {
+  title:'Foundations of Wellness', element:'Earth Element',
+  lede:'Nine weeks to ground you in the foundations of true wellness: breath, nourishment, rest, movement, environment and mindful living.',
+  welcome:['Each week unlocks a short video lesson from Charlie, a worksheet to help you reflect and put it into practice, and a new movement class.',
+    'Each week also adds one small daily habit. They stack as you go, so by week nine you have a whole routine, ticked off each day on the Today screen.'],
+  weeks:[
+   {n:1, mod:2153159509, title:'Why am I here?', habit:'Did one thing I love',
+    lede:'“From little things, big things grow.”',
+    lessons:[[2168814312,'Week 1','video'],[2168814313,'Inner Warrior: foundational yoga poses','video'],[2192593717,'Why am I here: guided meditation','audio']],
+    blocks:[
+     {t:'p', h:'This week', x:'Two questions bring you closer to your soul’s purpose: what do I love to do, and what comes easy to me? Doing what you love every day helps clear away heavy energy from the past and from life’s circumstances.'},
+     {t:'p', h:'Children of the Earth', x:'In Indigenous cultures we danced barefoot on Mother Earth and sang to Father Sky. We are no different from nature. We have our own rhythms, and they get thrown off by stress inside and around us. Understanding the earth element within you is where deeper healing starts.'},
+     {t:'note', x:'Over these nine weeks some sessions may stir up feelings you’ve pushed down. That’s part of healing the whole self, not just the physical, even when it feels uncomfortable.'},
+     {t:'ul', h:'Inner Warrior: yoga words to know', items:['<b>Asana:</b> a pose, or “a steady, comfortable seat”. Find comfort within each pose.','<b>Drishti:</b> a soft, steady point of focus for your gaze.','<b>Pranayama:</b> breath practices that regulate your life force.','<b>Nāḍīs:</b> the energy lines prana flows through. Open lines feel clear and grounded; blocked lines feel stuck.','<b>Alignment:</b> placing the body so energy flows and the pose supports, not strains.','<b>Props:</b> blocks, straps and bolsters are there to help.']},
+     {t:'prompts', k:'e1.p', items:['What do I love to do?','What comes easy to me?','How could I do a little more of what I love each day?']}
+    ]},
+   {n:2, mod:2153159510, title:'Breath', habit:'Morning breath-work (in 4, out 8)',
+    lede:'A simple practice to calm the nervous system and release stress.',
+    lessons:[[2168814317,'Breath-work','video'],[2168814318,'Inner Warrior: 7-minute guided breath-work','video'],[2192595898,'Breath as your inner guide: guided meditation','audio']],
+    blocks:[
+     {t:'p', h:'This week', x:'Start a 5 to 10 minute breath-work practice every morning, ideally as soon as you wake. It returns your breathing to a relaxed rhythm, clears your energy, calms the mind and sharpens focus, and you can use it any time of day.'},
+     {t:'practice', id:'e-breath', h:'Morning breath-work', dur:'5–10 minutes', steps:['Sit up or lie down somewhere free from distraction. Phone on aeroplane mode.','Set a timer, close your eyes and follow the breath in and out of your nostrils.','Notice the cool breath coming in and the warm breath going out.','Breathe in for 4 seconds and out for 8 seconds.','When thoughts come, let them pass and return to the breath.']},
+     {t:'note', x:'Prefer to be guided? The 7-minute Inner Warrior session talks you through it. Charlie still uses guided sessions after 15 years of practice.'},
+     {t:'fields', k:'e2.f', items:['When and where I’ll do my breath-work:']}
+    ]},
+   {n:3, mod:2153159511, title:'Water', habit:'Drank my water goal',
+    lede:'Hydration is one of the simplest foundations, and the easiest to forget.',
+    lessons:[[2168814322,'Hydration','video'],[2168814323,'Inner Warrior','video'],[2192597282,'Nourish your body, mind and energy: guided meditation','audio']],
+    blocks:[
+     {t:'p', h:'This week', x:'Work out how much water your body needs each day (the lesson in Kajabi has a calculator), then track it. Try starting with 1 litre first thing in the morning. After a while your body starts to crave it.'},
+     {t:'ul', h:'Ways to drink more', items:['Carry a reusable bottle everywhere.','Set reminders on your phone.','Infuse it with fruit, herbs or cucumber if plain water is hard.','Have a glass before each meal.','Keep water within reach at your desk and bedside.','Eat water-rich fruit and vegetables.','Tick it off each day so you can see your progress.']},
+     {t:'fields', k:'e3.f', items:['My daily water goal:']}
+    ]},
+   {n:4, mod:2153159512, title:'Food', habit:'Kept my food diary',
+    lede:'Awareness first. What you eat has a huge effect on your energy.',
+    lessons:[[2168814327,'Food diary','video'],[2168814328,'Inner Warrior: heart-space meditation','video'],[2192597364,'Nourished from the Earth: guided meditation','audio']],
+    blocks:[
+     {t:'p', h:'This week', x:'Keep a food diary and notice whether each thing you eat is a wholefood or a processed food. Aim for roughly 80% wholefoods and 20% processed. Be consistent and honest, and don’t judge yourself. It’s a tool, not a test.'},
+     {t:'practice', id:'e-mindful-eating', h:'Mindful eating', dur:'One meal a day', steps:['Eat slowly and notice the taste, texture and smell of each bite.','Put the phone and TV away while you eat.','Eat when you’re hungry and stop when you’re satisfied.','Take a moment of gratitude for the nourishment.','Notice your thoughts and feelings about food without judgement.']},
+     {t:'p', h:'Inner Warrior: your heart space', x:'This week’s meditation guides you out of your head and into your heart, to connect with your spirit, your Gii-Dhuwi, and live in alignment with who you truly are.'},
+     {t:'prompts', k:'e4.p', items:['What patterns am I noticing in what I eat?','How does my energy feel on mostly-wholefood days?']}
+    ]},
+   {n:5, mod:2153159513, title:'Shelter', habit:'Wrote three gratitudes',
+    lede:'Your inner energy and your outer home shape each other.',
+    lessons:[[2168814332,'Our inner and outer environment','video'],[2168814333,'Inner Warrior','video']],
+    blocks:[
+     {t:'p', h:'Inner world: gratitude', x:'A warm bed, clean water, food and comfort are blessings we often take for granted. Each morning, as you sip your cuppa, pause, breathe, and list what you’re grateful for. Gratitude is the best attitude.'},
+     {t:'ul', h:'A simple gratitude practice', items:['Write down three things each day, big or small.','Add why you’re grateful for each one.','Stuck? Start with what you usually take for granted.','Tell people what they mean to you.']},
+     {t:'fields', k:'e5.g', items:['Three things I’m grateful for, and why:']},
+     {t:'p', h:'Outer world: your home', x:'Clutter creates stress and overwhelm. Clearing and beautifying your space makes room for peace, clarity and new energy. Start small, one drawer or shelf at a time. Try four boxes: keep, donate, sell, rubbish. If you haven’t used it in a year, let it go.'},
+     {t:'checks', k:'e5.c', items:['Cleaned out a cupboard I’ve been putting off','Donated clothes I no longer wear','Decluttered my phone or computer','Created a practice space with plants, candles, oils or art']}
+    ]},
+   {n:6, mod:2153159514, title:'Sleep', habit:'In bed at my bedtime',
+    lede:'Getting those extra winks might be the thing you’ve been missing.',
+    lessons:[[2168814337,'Sleep hygiene','video'],[2168814338,'Inner Warrior','video']],
+    blocks:[
+     {t:'p', h:'Why sleep matters', x:'Sleep is when the body repairs itself. It sharpens memory and focus, steadies mood, helps balance appetite and metabolism, protects against chronic disease and lifts your energy and quality of life.'},
+     {t:'checks', k:'e6.c', items:['Same bedtime and wake time every day, weekends too','A relaxing bedtime routine: bath, book or calm music','Cool, dark, quiet bedroom','Less caffeine and alcohol, especially in the evening','No screens for an hour before bed','Exercise, but not too close to bedtime','Yoga, meditation or slow breathing before sleep']},
+     {t:'fields', k:'e6.f', items:['My bedtime:','My wake time:','My wind-down routine:']}
+    ]},
+   {n:7, mod:2153159515, title:'The brain and how it works', habit:'Mindful movement or yoga',
+    lede:'Yoga helps your brain regulate and respond more calmly.',
+    lessons:[[2168814342,'Our brain','video'],[2168814343,'Inner Warrior: yoga for the brain','video']],
+    blocks:[
+     {t:'ul', h:'Three parts of the brain', items:['<b>Prefrontal cortex:</b> decisions, planning, problem-solving, impulse control and emotional regulation.','<b>Hippocampus:</b> memory, learning and finding your way.','<b>Amygdala:</b> emotions like fear, anger and pleasure, and the fight-or-flight response.']},
+     {t:'ul', h:'Poses for focus (prefrontal cortex)', items:['Downward-facing dog','Warrior II','Tree pose','Dolphin pose']},
+     {t:'ul', h:'Practices for memory (hippocampus)', items:['Sun salutations','Fish pose','Camel pose','Standing forward fold']},
+     {t:'ul', h:'Poses to calm (amygdala)', items:['Child’s pose','Cat-cow','Legs up the wall','Savasana']},
+     {t:'note', x:'Listen to your body and work within your limits. If you’re new to yoga or have health concerns, check with a qualified teacher or health professional first.'},
+     {t:'prompts', k:'e7.p', items:['Which poses help me feel calmest?']}
+    ]},
+   {n:8, mod:2153159516, title:'Breath-work, meditation and the brain', habit:'Meditated',
+    lede:'When you focus on the breath, the mind clears and body, mind and spirit become one.',
+    lessons:[[2168814347,'Breath-work, meditation and the brain','video'],[2168814348,'Inner Warrior: guided meditation','video']],
+    blocks:[
+     {t:'ul', h:'What the practice does', items:['Lowers the stress hormone cortisol.','Strengthens focus and attention.','Helps you regulate emotions.','Builds connection, empathy and compassion.','Supports neuroplasticity, the brain’s ability to change and learn.']},
+     {t:'practice', id:'e-meditate', h:'Guided meditation', dur:'10–15 minutes', steps:['Sit up or lie down. Phone on aeroplane mode.','Light a candle or some incense if you like.','Deepen and lengthen the breath.','Let thoughts come and go without judgement.','Keep returning to the breath moving in and out.']},
+     {t:'prompts', k:'e8.p', items:['What do I notice in myself after meditating?']}
+    ]},
+   {n:9, mod:2153159518, title:'Daily practices', habit:'Followed my daily routine',
+    lede:'Consistency matters more than intensity. Even five minutes a day shifts your energy.',
+    lessons:[[2168984735,'Daily movement and mindfulness','text'],[2170318832,'Daily routine','text']],
+    blocks:[
+     {t:'ul', h:'Making it stick', items:['Start small and build up.','Schedule it like any other appointment.','Mix it up: yoga, walking, running, strength, dancing, boxing.','Choose what you enjoy.','Bring mindfulness into everyday moments, like the warm water while you wash the dishes.','Find accountability: a friend, a coach, or the comments in the program.']},
+     {t:'ul', h:'Charlie’s morning, for example', items:['Wake up at 5am','10 minutes of breath-work','5–7 minute gratitude meditation','Hydrate, then coffee','Mindful movement: a run, strength training or yoga','2-minute cold shower','Eat, then preschool drop-off and work','Before bed: a little yoga, a short meditation and lavender in the vaporiser']},
+     {t:'note', x:'Your routine should be something you enjoy, and it can change with the seasons. Like nature, we move in cycles.'},
+     {t:'fields', k:'e9.f', items:['My morning routine:','My evening routine:']},
+     {t:'prompts', k:'e9.p', items:['What will I keep doing after these nine weeks?']}
+    ]}
+  ]
+};
+
 const REVIEW = ['What patterns do I notice across the week?','What helped on my better days?','What was happening on my harder days?','What’s one small thing to try next week?'];
 const CRISIS = [['Lifeline','13 11 14','131114'],['13YARN','13 92 76','139276'],['Beyond Blue','1300 22 4636','1300224636'],['Emergency','000','000']];
 
@@ -433,36 +531,106 @@ function block(b){
 }
 const crisisCard = () => `<div class="card crisis"><h3>Crisis support, 24 hours</h3>${CRISIS.map(([n,s,t])=>`<a href="tel:${t}"><span>${n}</span><b>${s}</b></a>`).join('')}</div>`;
 
+/* ---------- Earth program helpers ---------- */
+function eDay(){
+  if (!get('e.start')) return null;
+  const [y,m,d] = get('e.start').split('-').map(Number);
+  return Math.floor((new Date(new Date().toDateString()) - new Date(y, m-1, d)) / 864e5) + 1;
+}
+function eDate(n){ const [y,m,d] = get('e.start').split('-').map(Number); return new Date(y, m-1, d + n - 1); }
+const eWeekNow = () => { const n = eDay(); return n == null ? null : Math.min(9, Math.max(1, Math.ceil(n/7))); };
+const eDone = n => !!get('done.e'+n);
+const eDoneCount = () => EARTH.weeks.filter(w => eDone(w.n)).length;
+const lessonLink = (w, [id, title, type]) => `<a class="mod" href="${KAJABI}${w.mod}/posts/${id}" target="_blank" rel="noopener">
+  <span class="code" aria-hidden="true">${type==='audio'?'♫':type==='video'?'▶':'¶'}</span><span class="t"><b>${title}</b><span>${type==='audio'?'Listen':type==='video'?'Watch':'Read'} in Kajabi · members</span></span><span class="arrow">↗</span></a>`;
+const progressCard = (line, done, total, unit) => `<div style="display:flex;justify-content:space-between;font-size:14px"><b>${line}</b><span class="muted">${done} of ${total} ${unit}</span></div><div class="bar"><i style="width:${done/total*100}%"></i></div>`;
+function cdteLine(){ const dn = dayNum(); return dn < 1 ? `Starts ${fmt(dateForDay(1))}` : dn <= 28 ? `Day ${dn} of 28` : dn <= 90 ? `Day ${dn} of your 90-day plan` : 'Program complete'; }
+function earthLine(){ const n = eDay(); return n == null ? 'Not started yet' : n < 1 ? `Starts ${fmt(eDate(1))}` : n <= 63 ? `Week ${eWeekNow()} · day ${n} of 63` : 'Nine weeks complete'; }
+
+// The Earth habits stack: by week N, the habits from weeks 1..N are all ticked each day.
+function earthToday(){
+  const n = eDay();
+  if (n == null) return `<a class="mod" href="#/earth"><span class="code">●</span><span class="t"><b>Add Foundations of Wellness</b><span>Nine weeks of earth-element habits, ticked off here each day</span></span><span class="arrow">→</span></a>`;
+  if (n < 1 || n > 63) return '';
+  const wk = eWeekNow();
+  return `<h2>Earth habits</h2><div class="card"><p class="small muted" style="margin:0">Foundations of Wellness · <a href="#/e/${wk}">Week ${wk}: ${EARTH.weeks[wk-1].title}</a></p>
+    ${EARTH.weeks.slice(0, wk).map(w => check(`e.d${n}.h${w.n}`, w.habit, w.n===wk ? 'New this week' : 'Week '+w.n)).join('')}</div>`;
+}
+
 /* ---------- Views ---------- */
 function vHome(){
-  const done = doneCount(), dn = dayNum();
-  const dayLine = dn < 1 ? `Starts ${fmt(dateForDay(1))}` : dn <= 28 ? `Day ${dn} of 28` : dn <= 90 ? `Day ${dn} of your 90-day plan` : 'Program complete';
+  const done = doneCount(), en = eDay();
   return `
   ${installBanner()}
-  <div class="hero"><div class="eyebrow">A psychedelic integration program</div><h1>Coming Down to Earth</h1>
-    <p>Four weeks to ground what surfaced, settle the nervous system and carry the insight into everyday life.</p></div>
-  <div class="card"><div style="display:flex;justify-content:space-between;font-size:14px"><b>${dayLine}</b><span class="muted">${done} of 11 modules</span></div>
-    <div class="bar"><i style="width:${done/11*100}%"></i></div></div>
-  <a class="cta" href="#/today"><div><h3>Today’s practice</h3><span class="small">Check-in, wind-down and your daily log</span></div><span class="arrow">→</span></a>
+  <div class="hero"><div class="eyebrow">Charlie Abra · Tathra</div><h1>Down to Earth</h1>
+    <p>Your practices, notes and progress, kept on this device.</p></div>
+  <a class="cta" href="#/today"><div><h3>Today</h3><span class="small">Your daily rhythm, Earth habits and log</span></div><span class="arrow">→</span></a>
+  <h2>Your programs</h2>
+  <a class="card" href="#/cdte" style="display:block;text-decoration:none;color:inherit">
+    <div class="eyebrow">Four weeks · 11 modules</div><h3 style="margin:4px 0 4px">Coming Down to Earth</h3>
+    <p class="small muted">Ground what surfaced, settle the nervous system and carry the insight into everyday life.</p>
+    ${progressCard(cdteLine(), done, 11, 'modules')}</a>
+  <a class="card" href="#/earth" style="display:block;text-decoration:none;color:inherit">
+    <div class="eyebrow">Nine weeks · Earth element</div><h3 style="margin:4px 0 4px">Foundations of Wellness</h3>
+    <p class="small muted">Breath, water, food, shelter, sleep and daily practice: a strong, steady base.</p>
+    ${en == null ? '<p class="small" style="margin:0;color:var(--clay);font-weight:600">Tap to start →</p>' : progressCard(earthLine(), eDoneCount(), 9, 'weeks')}</a>
+  <h2>Your data</h2>
+  <div class="card"><p class="small">Everything you write and tick is saved on this device only. Nothing is sent anywhere. Make a backup now and then, especially before changing phones.</p>
+    <div class="btns"><button class="btn" data-act="export">Save a backup</button><button class="btn" data-act="import">Restore a backup</button><button class="btn danger" data-act="reset">Clear everything</button></div></div>
+  <p class="foot">Integration and wellness support. Not therapy, medical advice or supply. If you have health concerns, please see your GP or a psychologist.</p>`;
+}
+
+function vEarth(){
+  const n = eDay(), wk = eWeekNow();
+  return `<a class="back" href="#/">← Home</a>
+  <div class="mod-head"><div class="eyebrow">${EARTH.element}</div><h1>${EARTH.title}</h1><p class="lede">${EARTH.lede}</p></div>
+  <div class="card">${EARTH.welcome.map(p=>`<p>${p}</p>`).join('')}
+    ${n == null ? `<div class="btns"><button class="btn primary" data-act="startEarth">Start today</button></div>`
+      : `${progressCard(earthLine(), eDoneCount(), 9, 'weeks')}<div class="field"><label for="e.start">Start date</label><input type="date" id="e.start" data-k="e.start" value="${esc(get('e.start'))}"></div>`}</div>
+  <a class="mod" href="${KAJABI}2153159508/posts/2168814310" target="_blank" rel="noopener"><span class="code">▶</span><span class="t"><b>Welcome from Charlie</b><span>Watch in Kajabi · members</span></span><span class="arrow">↗</span></a>
+  ${EARTH.weeks.map(w=>`<a class="mod" href="#/e/${w.n}" ${w.n===wk?'style="border-color:var(--clay)"':''}><span class="code">W${w.n}</span><span class="t"><b>${w.title}</b><span>Daily habit: ${w.habit.toLowerCase()}</span></span><span class="dot ${eDone(w.n)?'on':''}">${eDone(w.n)?'✓':''}</span></a>`).join('')}
+  <p class="foot">Lesson videos and guided meditations are for program members in Kajabi.</p>`;
+}
+
+function vEarthWeek(num){
+  const w = EARTH.weeks.find(x=>x.n===num); if (!w) return vEarth();
+  const n = eDay(), first = (w.n-1)*7+1;
+  const grid = n == null ? `<p class="small muted">Start the program on the <a href="#/earth">Foundations of Wellness</a> page to track this habit by day.</p>`
+    : `<div class="days">${Array.from({length:7},(_,i)=>{const d=first+i, k=`e.d${d}.h${w.n}`, on=!!get(k);
+        return `<button type="button" class="day ${on?'logged':''} ${d===n?'today':''}" data-k="${k}" data-v="1" aria-pressed="${on}"><span class="muted">${fmt(eDate(d),{weekday:'short'})}</span><b>${on?'✓':i+1}</b></button>`;}).join('')}</div>
+       <p class="small muted" style="margin:0">Keep this habit going in the weeks after. It stays on your Today screen.</p>`;
+  const prev = EARTH.weeks[num-2], next = EARTH.weeks[num];
+  return `<a class="back" href="#/earth">← Foundations of Wellness</a>
+  <div class="mod-head"><div class="eyebrow">Earth element · Week ${w.n}</div><h1>${w.title}</h1><p class="lede">${w.lede}</p></div>
+  <h2>Lessons</h2>${w.lessons.map(l=>lessonLink(w,l)).join('')}
+  <h2>The practice</h2>${w.blocks.map(block).join('')}
+  <h2>This week’s habit</h2><div class="card"><h3>${w.habit}</h3>${grid}</div>
+  <div class="complete">${check('done.e'+w.n, 'Mark this week complete')}</div>
+  <div class="pager">${prev?`<a href="#/e/${prev.n}">← Week ${prev.n}</a>`:'<span></span>'}${next?`<a href="#/e/${next.n}">Week ${next.n} →</a>`:'<a href="#/earth">Back to program →</a>'}</div>`;
+}
+
+function vCdte(){
+  const done = doneCount();
+  return `<a class="back" href="#/">← Home</a>
+  <div class="mod-head"><div class="eyebrow">A psychedelic integration program</div><h1>Coming Down to Earth</h1>
+    <p class="lede">Four weeks to ground what surfaced, settle the nervous system and carry the insight into everyday life.</p></div>
+  <div class="card">${progressCard(cdteLine(), done, 11, 'modules')}
+    <div class="field"><label for="start">Program start date</label><input type="date" id="start" data-k="start" value="${esc(get('start'))}"></div></div>
   ${WEEKS.map(w=>`<section class="week"><div class="week-head"><span class="week-num">0${w.n}</span><div><div class="eyebrow">Week ${w.word}</div><h2 style="margin:2px 0 0">${w.name}</h2></div></div>
     <p class="muted small">${w.sub}</p>
     ${MODULES.filter(m=>m.week===w.n).map(m=>`<a class="mod" href="#/m/${m.id}"><span class="code">M${m.id}</span><span class="t"><b>${m.title}</b><span>${m.output}</span></span><span class="dot ${modDone(m.id)?'on':''}">${modDone(m.id)?'✓':''}</span></a>`).join('')}
   </section>`).join('')}
-  <h2>Your data</h2>
-  <div class="card"><p class="small">Everything you write and tick is saved on this device only. Nothing is sent anywhere. Make a backup now and then, especially before changing phones.</p>
-    <div class="field"><label for="start">Program start date</label><input type="date" id="start" data-k="start" value="${esc(get('start'))}"></div>
-    <div class="btns"><button class="btn" data-act="export">Save a backup</button><button class="btn" data-act="import">Restore a backup</button><button class="btn danger" data-act="reset">Clear everything</button></div></div>
   <p class="foot">This is integration support. It is not therapy, medical advice or supply. If you have mental health concerns, please see your GP or a psychologist.</p>`;
 }
 
 function vModule(id){
   const m = MODULES.find(x=>x.id===id); if (!m) return vHome();
   const w = WEEKS[m.week-1], prev = MODULES.find(x=>x.id===id-1), next = MODULES.find(x=>x.id===id+1);
-  return `<a class="back" href="#/">← Program</a>
+  return `<a class="back" href="#/cdte">← Coming Down to Earth</a>
   <div class="mod-head"><div class="eyebrow">Week ${w.word} · ${w.name} · Module ${m.id}</div><h1>${m.title}</h1><p class="lede">${m.lede}</p></div>
   ${m.blocks.map(block).join('')}
   <div class="complete">${check('done.m'+m.id, 'Mark this module complete', 'Output: '+m.output)}</div>
-  <div class="pager">${prev?`<a href="#/m/${prev.id}">← M${prev.id}</a>`:'<span></span>'}${next?`<a href="#/m/${next.id}">M${next.id} →</a>`:'<a href="#/">Back to program →</a>'}</div>
+  <div class="pager">${prev?`<a href="#/m/${prev.id}">← M${prev.id}</a>`:'<span></span>'}${next?`<a href="#/m/${next.id}">M${next.id} →</a>`:'<a href="#/cdte">Back to program →</a>'}</div>
   <p class="foot">Integration support only, not therapy, medical advice or supply.</p>`;
 }
 
@@ -473,7 +641,7 @@ function vDay(n, isToday){
   return `${isToday?'':`<a class="back" href="#/tracker">← Tracker</a>`}
   <div class="mod-head"><div class="eyebrow">${out28 ? (n<1?'Before you begin':'Beyond day 28') : 'Day '+n+' of 28'}</div><h1>${isToday?'Today':fmt(d,{weekday:'long',day:'numeric',month:'short'})}</h1>
     <p class="lede">${isToday?fmt(d):'Small, steady and repeated beats big and occasional.'}</p></div>
-  ${out28 && isToday ? `<div class="note">${n<1?`Your program starts on ${fmt(dateForDay(1))}. You can change the start date on the Program screen.`:`You’ve finished the four weeks. Keep your rhythm going and follow <a href="#/m/11">your 90-day plan</a>.`}</div>`:''}
+  ${out28 && isToday ? `<div class="note">${n<1?`Your program starts on ${fmt(dateForDay(1))}. You can change the start date on the <a href="#/cdte">Coming Down to Earth</a> page.`:`You’ve finished the four weeks. Keep your rhythm going and follow <a href="#/m/11">your 90-day plan</a>.`}</div>`:''}
   <h2>Daily rhythm</h2>
   <div class="card">
     ${check(p+'am', 'Morning check-in', '15 min · arrive, body scan, breath, journal')}
@@ -484,6 +652,7 @@ function vDay(n, isToday){
     ${area(p+'pm.moments', 'Three moments from today')}
     ${area(p+'pm.setdown', 'One thing I’m ready to set down tonight')}
   </div>
+  ${isToday ? earthToday() : ''}
   ${habits.length?`<h2>Keystone habits</h2><div class="card">${habits.map(i=>check(p+'habit.'+i, esc(get('habit.'+i+'.will')), 'After I '+esc(get('habit.'+i+'.after')||'…'))).join('')}</div>`:''}
   <h2>Daily log</h2>
   <div class="card">
@@ -544,6 +713,9 @@ function route(){
   const h = location.hash.replace(/^#\/?/, '');
   if (h.startsWith('m/')) return {v:'module', id:+h.slice(2)};
   if (h.startsWith('day/')) return {v:'day', n:+h.slice(4)};
+  if (h.startsWith('e/')) return {v:'eweek', n:+h.slice(2)};
+  if (h === 'earth') return {v:'earth'};
+  if (h === 'cdte') return {v:'cdte'};
   if (h === 'today') return {v:'today'};
   if (h === 'tracker') return {v:'tracker'};
   if (h === 'help') return {v:'help'};
@@ -552,8 +724,9 @@ function route(){
 function render(keepScroll){
   const r = route(), app = document.getElementById('app'), y = scrollY;
   app.innerHTML = r.v==='module' ? vModule(r.id) : r.v==='today' ? vDay(dayNum(), true) : r.v==='day' ? vDay(r.n, false)
-    : r.v==='tracker' ? vTracker() : r.v==='help' ? vHelp() : vHome();
-  const tab = {module:'home', day:'tracker'}[r.v] || r.v;
+    : r.v==='tracker' ? vTracker() : r.v==='help' ? vHelp() : r.v==='cdte' ? vCdte() : r.v==='earth' ? vEarth()
+    : r.v==='eweek' ? vEarthWeek(r.n) : vHome();
+  const tab = {module:'home', cdte:'home', earth:'home', eweek:'home', day:'tracker'}[r.v] || r.v;
   document.querySelectorAll('nav.tabbar a').forEach(a => a.classList.toggle('on', a.dataset.tab===tab));
   app.querySelectorAll('textarea').forEach(grow);
   if (keepScroll) scrollTo(0, y);
@@ -571,6 +744,7 @@ document.addEventListener('input', e => {
 document.addEventListener('change', e => {
   const k = e.target.dataset.k; if (!k) return;
   if (e.target.type === 'checkbox') { set(k, e.target.checked); if (k.startsWith('done.') || k.startsWith('p.')) render(true); }
+  if (k === 'e.start') { if (!e.target.value) S['e.start'] = todayISO(); persist(); render(true); }
   if (k === 'start') { if (!e.target.value) { S.start = todayISO(); } persist(); render(true); }
 });
 document.addEventListener('click', e => {
@@ -580,6 +754,7 @@ document.addEventListener('click', e => {
   const act = b.dataset.act;
   if (act === 'hideInstall') { sessionStorage.setItem('hideInstall', 1); render(true); }
   if (act === 'install' && deferredPrompt) { deferredPrompt.prompt(); deferredPrompt.userChoice.finally(() => { deferredPrompt = null; render(true); }); }
+  if (act === 'startEarth') { S['e.start'] = todayISO(); persist(); render(true); }
   if (act === 'export') exportData();
   if (act === 'import') importData();
   if (act === 'reset' && confirm('Clear everything you’ve written and ticked on this device? This can’t be undone unless you have a backup.')) {

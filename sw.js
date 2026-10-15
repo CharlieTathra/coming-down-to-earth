@@ -1,6 +1,6 @@
 // Offline support: cache the app shell so it opens without a connection.
 // Bump VERSION whenever any file changes so phones pick up the update.
-const VERSION = 'cdte-v2';
+const VERSION = 'cdte-v3';
 const FILES = [
   './',
   './index.html',
