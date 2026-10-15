@@ -294,6 +294,7 @@ const MODULES = [
      'Ask: “Where do I feel this in my body?” Describe it in plain words: tight, heavy, hot, buzzing.',
      'Stay with it for three breaths, then return to your resource.',
      'Move between the two a few times. Stop whenever you need to.']},
+   {t:'track', file:'audio/guniimaa-healing-parts-and-resource.m4a', title:'Guniimaa Healing: Parts & Resource', kind:'Guided session', dur:'25 min'},
    {t:'table', h:'My inventory', k:'m7.inv', rows:5, label:'Item', cols:[
      {k:'what', l:'What surfaced', wide:true},{k:'feel', l:'Feeling'},{k:'where', l:'Where in body'},
      {k:'int', l:'Intensity 0–10', num:true},{k:'open', l:'Still unfinished', check:true}]},
@@ -358,7 +359,7 @@ const EARTH = {
   weeks:[
    {n:1, title:'Why am I here?', habit:'Did one thing I love',
     lede:'“From little things, big things grow.”',
-    tracks:[],
+    tracks:[{file:'audio/deep-inner-wisdom.mp3', title:'Deep Inner Wisdom', kind:'Guided meditation', dur:'6 min'}],
     blocks:[
      {t:'p', h:'This week', x:'Two questions bring you closer to your soul’s purpose: what do I love to do, and what comes easy to me? Doing what you love every day helps clear away heavy energy from the past and from life’s circumstances.'},
      {t:'p', h:'Children of the Earth', x:'In Indigenous cultures we danced barefoot on Mother Earth and sang to Father Sky. We are no different from nature. We have our own rhythms, and they get thrown off by stress inside and around us. Understanding the earth element within you is where deeper healing starts.'},
@@ -368,7 +369,7 @@ const EARTH = {
     ]},
    {n:2, title:'Breath', habit:'Morning breath-work (in 4, out 8)',
     lede:'A simple practice to calm the nervous system and release stress.',
-    tracks:[],
+    tracks:[{file:'audio/breath-as-your-inner-guide.mp3', title:'Breath as Your Inner Guide', kind:'Guided meditation', dur:'9 min'}],
     blocks:[
      {t:'p', h:'This week', x:'Start a 5 to 10 minute breath-work practice every morning, ideally as soon as you wake. It returns your breathing to a relaxed rhythm, clears your energy, calms the mind and sharpens focus, and you can use it any time of day.'},
      {t:'practice', id:'e-breath', h:'Morning breath-work', dur:'5–10 minutes', steps:['Sit up or lie down somewhere free from distraction. Phone on aeroplane mode.','Set a timer, close your eyes and follow the breath in and out of your nostrils.','Notice the cool breath coming in and the warm breath going out.','Breathe in for 4 seconds and out for 8 seconds.','When thoughts come, let them pass and return to the breath.']},
@@ -514,6 +515,7 @@ function block(b){
     case 'checkins': return `<div class="card"><h3>Check-in rituals</h3><p class="small muted">30 minutes each. Reread your intention and tracker. What’s changed? What’s held? What needs more support?</p>
         ${[6,9,12].map(w=>{const d=dateForDay((w-1)*7+1); return check('checkin.w'+w, `Week ${w} check-in`, fmt(d,{day:'numeric',month:'long',year:'numeric'}));}).join('')}
         ${[6,9,12].map(w=>area('checkin.w'+w+'.notes', `Week ${w} notes`)).join('')}</div>`;
+    case 'track': return track(b);
     case 'crisis': return crisisCard();
   }
   return '';
@@ -548,6 +550,10 @@ function earthToday(){
     ${EARTH.weeks.slice(0, wk).map(w => check(`e.d${n}.h${w.n}`, w.habit, w.n===wk ? 'New this week' : 'Week '+w.n)).join('')}</div>`;
 }
 
+const ALL_TRACKS = () => [
+  ...MODULES.flatMap(m => m.blocks.filter(b=>b.t==='track').map(b => ({...b, from:`Coming Down to Earth \u00b7 M${m.id}`, href:`#/m/${m.id}`}))),
+  ...EARTH.weeks.flatMap(w => w.tracks.map(t => ({...t, from:`Foundations of Wellness \u00b7 Week ${w.n}`, href:`#/e/${w.n}`})))];
+
 /* ---------- Views ---------- */
 function vHome(){
   const done = doneCount(), en = eDay();
@@ -556,6 +562,7 @@ function vHome(){
   <div class="hero"><div class="eyebrow">Charlie Abra · Tathra</div><h1>Down to Earth</h1>
     <p>Your practices, notes and progress, kept on this device.</p></div>
   <a class="cta" href="#/today"><div><h3>Today</h3><span class="small">Your daily rhythm, Earth habits and log</span></div><span class="arrow">→</span></a>
+  <a class="mod" href="#/sessions"><span class="code" aria-hidden="true">\u266b</span><span class="t"><b>Guided sessions</b><span>${ALL_TRACKS().length} meditations and breath-work sessions</span></span><span class="arrow">\u2192</span></a>
   <h2>Your programs</h2>
   <a class="card" href="#/cdte" style="display:block;text-decoration:none;color:inherit">
     <div class="eyebrow">Four weeks · 11 modules</div><h3 style="margin:4px 0 4px">Coming Down to Earth</h3>
@@ -596,6 +603,12 @@ function vEarthWeek(num){
   <h2>This week’s habit</h2><div class="card"><h3>${w.habit}</h3>${grid}</div>
   <div class="complete">${check('done.e'+w.n, 'Mark this week complete')}</div>
   <div class="pager">${prev?`<a href="#/e/${prev.n}">← Week ${prev.n}</a>`:'<span></span>'}${next?`<a href="#/e/${next.n}">Week ${next.n} →</a>`:'<a href="#/earth">Back to program →</a>'}</div>`;
+}
+
+function vSessions(){
+  return `<a class="back" href="#/">\u2190 Home</a>
+  <div class="mod-head"><div class="eyebrow">Charlie\u2019s recordings</div><h1>Guided sessions</h1><p class="lede">Meditations and breath-work to come back to any time.</p></div>
+  ${ALL_TRACKS().map(t => track(t) + `<p class="small" style="margin:-4px 0 18px 4px"><a href="${t.href}">${t.from}</a></p>`).join('')}`;
 }
 
 function vCdte(){
@@ -705,6 +718,7 @@ function route(){
   if (h.startsWith('e/')) return {v:'eweek', n:+h.slice(2)};
   if (h === 'earth') return {v:'earth'};
   if (h === 'cdte') return {v:'cdte'};
+  if (h === 'sessions') return {v:'sessions'};
   if (h === 'today') return {v:'today'};
   if (h === 'tracker') return {v:'tracker'};
   if (h === 'help') return {v:'help'};
@@ -713,9 +727,9 @@ function route(){
 function render(keepScroll){
   const r = route(), app = document.getElementById('app'), y = scrollY;
   app.innerHTML = r.v==='module' ? vModule(r.id) : r.v==='today' ? vDay(dayNum(), true) : r.v==='day' ? vDay(r.n, false)
-    : r.v==='tracker' ? vTracker() : r.v==='help' ? vHelp() : r.v==='cdte' ? vCdte() : r.v==='earth' ? vEarth()
+    : r.v==='tracker' ? vTracker() : r.v==='help' ? vHelp() : r.v==='cdte' ? vCdte() : r.v==='sessions' ? vSessions() : r.v==='earth' ? vEarth()
     : r.v==='eweek' ? vEarthWeek(r.n) : vHome();
-  const tab = {module:'home', cdte:'home', earth:'home', eweek:'home', day:'tracker'}[r.v] || r.v;
+  const tab = {module:'home', cdte:'home', sessions:'home', earth:'home', eweek:'home', day:'tracker'}[r.v] || r.v;
   document.querySelectorAll('nav.tabbar a').forEach(a => a.classList.toggle('on', a.dataset.tab===tab));
   app.querySelectorAll('textarea').forEach(grow);
   if (keepScroll) scrollTo(0, y);

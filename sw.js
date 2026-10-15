@@ -1,6 +1,6 @@
 // Offline support: cache the app shell so it opens without a connection.
 // Bump VERSION whenever any file changes so phones pick up the update.
-const VERSION = 'cdte-v4';
+const VERSION = 'cdte-v5';
 const FILES = [
   './',
   './index.html',
@@ -26,6 +26,8 @@ self.addEventListener('activate', e => {
 // Network first for the page (so updates arrive), cache first for everything else.
 self.addEventListener('fetch', e => {
   if (e.request.method !== 'GET') return;
+  // Let audio stream straight from the network (range requests), so long sessions play smoothly.
+  if (e.request.destination === 'audio' || new URL(e.request.url).pathname.includes('/audio/')) return;
   if (e.request.mode === 'navigate') {
     e.respondWith(
       fetch(e.request)
