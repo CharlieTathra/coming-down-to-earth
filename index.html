@@ -357,7 +357,7 @@ const EARTH = {
   welcome:['Each week brings a short lesson, a practice, guided sessions and a worksheet to help you reflect and put it into your life.',
     'Each week also adds one small daily habit. They stack as you go, so by week eight you have a whole routine, ticked off each day on the Today screen.'],
   weeks:[
-   {n:1, title:'Why am I here?', habit:'Did one thing I love',
+   {n:1, topic:'Why am I here?', habit:'Do one thing I love',
     lede:'“From little things, big things grow.”',
     tracks:[{file:'audio/deep-inner-wisdom.mp3', title:'Deep Inner Wisdom', kind:'Guided meditation', dur:'6 min'}],
     blocks:[
@@ -367,8 +367,8 @@ const EARTH = {
      {t:'ul', h:'Inner Warrior: yoga words to know', items:['<b>Asana:</b> a pose, or “a steady, comfortable seat”. Find comfort within each pose.','<b>Drishti:</b> a soft, steady point of focus for your gaze.','<b>Pranayama:</b> breath practices that regulate your life force.','<b>Nāḍīs:</b> the energy lines prana flows through. Open lines feel clear and grounded; blocked lines feel stuck.','<b>Alignment:</b> placing the body so energy flows and the pose supports, not strains.','<b>Props:</b> blocks, straps and bolsters are there to help.']},
      {t:'prompts', k:'e1.p', items:['What do I love to do?','What comes easy to me?','How could I do a little more of what I love each day?']}
     ]},
-   {n:2, title:'Breath', habit:'Morning breath-work (in 4, out 8)',
-    lede:'A simple practice to calm the nervous system and release stress.',
+   {n:2, topic:'Breath', habit:'Morning breath-work',
+    lede:'Breathe in for 4, out for 8. A simple practice to calm the nervous system and release stress.',
     tracks:[{file:'audio/breath-as-your-inner-guide.mp3', title:'Breath as Your Inner Guide', kind:'Guided meditation', dur:'9 min'}],
     blocks:[
      {t:'p', h:'This week', x:'Start a 5 to 10 minute breath-work practice every morning, ideally as soon as you wake. It returns your breathing to a relaxed rhythm, clears your energy, calms the mind and sharpens focus, and you can use it any time of day.'},
@@ -376,7 +376,7 @@ const EARTH = {
      {t:'note', x:'Prefer to be guided? A guided session makes it easier for the mind to stay focused. Charlie still uses them after 15 years of practice.'},
      {t:'fields', k:'e2.f', items:['When and where I’ll do my breath-work:']}
     ]},
-   {n:3, title:'Water', habit:'Drank my water goal',
+   {n:3, topic:'Water', habit:'Drink my water goal',
     lede:'Hydration is one of the simplest foundations, and the easiest to forget.',
     tracks:[],
     blocks:[
@@ -384,7 +384,7 @@ const EARTH = {
      {t:'ul', h:'Ways to drink more', items:['Carry a reusable bottle everywhere.','Set reminders on your phone.','Infuse it with fruit, herbs or cucumber if plain water is hard.','Have a glass before each meal.','Keep water within reach at your desk and bedside.','Eat water-rich fruit and vegetables.','Tick it off each day so you can see your progress.']},
      {t:'fields', k:'e3.f', items:['My daily water goal:']}
     ]},
-   {n:4, title:'Food', habit:'Kept my food diary',
+   {n:4, topic:'Food', habit:'Keep a food diary',
     lede:'Awareness first. What you eat has a huge effect on your energy.',
     tracks:[],
     blocks:[
@@ -393,7 +393,7 @@ const EARTH = {
      {t:'p', h:'Inner Warrior: your heart space', x:'This week’s meditation guides you out of your head and into your heart, to connect with your spirit, your Gii-Dhuwi, and live in alignment with who you truly are.'},
      {t:'prompts', k:'e4.p', items:['What patterns am I noticing in what I eat?','How does my energy feel on mostly-wholefood days?']}
     ]},
-   {n:5, title:'Sleep', habit:'In bed at my bedtime',
+   {n:5, topic:'Sleep', habit:'In bed at my bedtime',
     lede:'Getting those extra winks might be the thing you’ve been missing.',
     tracks:[],
     blocks:[
@@ -401,7 +401,7 @@ const EARTH = {
      {t:'checks', k:'e6.c', items:['Same bedtime and wake time every day, weekends too','A relaxing bedtime routine: bath, book or calm music','Cool, dark, quiet bedroom','Less caffeine and alcohol, especially in the evening','No screens for an hour before bed','Exercise, but not too close to bedtime','Yoga, meditation or slow breathing before sleep']},
      {t:'fields', k:'e6.f', items:['My bedtime:','My wake time:','My wind-down routine:']}
     ]},
-   {n:6, title:'The brain and how it works', habit:'Mindful movement or yoga',
+   {n:6, topic:'The brain and how it works', habit:'Mindful movement or yoga',
     lede:'Yoga helps your brain regulate and respond more calmly.',
     tracks:[],
     blocks:[
@@ -412,7 +412,7 @@ const EARTH = {
      {t:'note', x:'Listen to your body and work within your limits. If you’re new to yoga or have health concerns, check with a qualified teacher or health professional first.'},
      {t:'prompts', k:'e7.p', items:['Which poses help me feel calmest?']}
     ]},
-   {n:7, title:'Breath-work, meditation and the brain', habit:'Meditated',
+   {n:7, topic:'Breath-work, meditation and the brain', habit:'Meditate',
     lede:'When you focus on the breath, the mind clears and body, mind and spirit become one.',
     tracks:[],
     blocks:[
@@ -420,7 +420,7 @@ const EARTH = {
      {t:'practice', id:'e-meditate', h:'Guided meditation', dur:'10–15 minutes', steps:['Sit up or lie down. Phone on aeroplane mode.','Light a candle or some incense if you like.','Deepen and lengthen the breath.','Let thoughts come and go without judgement.','Keep returning to the breath moving in and out.']},
      {t:'prompts', k:'e8.p', items:['What do I notice in myself after meditating?']}
     ]},
-   {n:8, title:'Daily practices', habit:'Followed my daily routine',
+   {n:8, topic:'Daily practices', habit:'Follow my daily routine',
     lede:'Consistency matters more than intensity. Even five minutes a day shifts your energy.',
     tracks:[],
     blocks:[
@@ -546,7 +546,7 @@ function earthToday(){
   if (n == null) return `<a class="mod" href="#/earth"><span class="code">●</span><span class="t"><b>Add Foundations of Wellness</b><span>Eight weeks of earth-element habits, ticked off here each day</span></span><span class="arrow">→</span></a>`;
   if (n < 1 || n > EARTH.weeks.length*7) return '';
   const wk = eWeekNow();
-  return `<h2>Earth habits</h2><div class="card"><p class="small muted" style="margin:0">Foundations of Wellness · <a href="#/e/${wk}">Week ${wk}: ${EARTH.weeks[wk-1].title}</a></p>
+  return `<h2>Earth habits</h2><div class="card"><p class="small muted" style="margin:0">Foundations of Wellness · <a href="#/e/${wk}">Week ${wk}: ${EARTH.weeks[wk-1].topic}</a></p>
     ${EARTH.weeks.slice(0, wk).map(w => check(`e.d${n}.h${w.n}`, w.habit, w.n===wk ? 'New this week' : 'Week '+w.n)).join('')}</div>`;
 }
 
@@ -585,7 +585,7 @@ function vEarth(){
   <div class="card">${EARTH.welcome.map(p=>`<p>${p}</p>`).join('')}
     ${n == null ? `<div class="btns"><button class="btn primary" data-act="startEarth">Start today</button></div>`
       : `${progressCard(earthLine(), eDoneCount(), EARTH.weeks.length, 'weeks')}<div class="field"><label for="e.start">Start date</label><input type="date" id="e.start" data-k="e.start" value="${esc(get('e.start'))}"></div>`}</div>
-  ${EARTH.weeks.map(w=>`<a class="mod" href="#/e/${w.n}" ${w.n===wk?'style="border-color:var(--clay)"':''}><span class="code">W${w.n}</span><span class="t"><b>${w.title}</b><span>Daily habit: ${w.habit.toLowerCase()}</span></span><span class="dot ${eDone(w.n)?'on':''}">${eDone(w.n)?'✓':''}</span></a>`).join('')}`;
+  ${EARTH.weeks.map(w=>`<a class="mod" href="#/e/${w.n}" ${w.n===wk?'style="border-color:var(--clay)"':''}><span class="code">W${w.n}</span><span class="t"><b>${w.habit}</b><span>${w.topic}</span></span><span class="dot ${eDone(w.n)?'on':''}">${eDone(w.n)?'✓':''}</span></a>`).join('')}`;
 }
 
 function vEarthWeek(num){
@@ -597,10 +597,10 @@ function vEarthWeek(num){
        <p class="small muted" style="margin:0">Keep this habit going in the weeks after. It stays on your Today screen.</p>`;
   const prev = EARTH.weeks[num-2], next = EARTH.weeks[num];
   return `<a class="back" href="#/earth">← Foundations of Wellness</a>
-  <div class="mod-head"><div class="eyebrow">Earth element · Week ${w.n}</div><h1>${w.title}</h1><p class="lede">${w.lede}</p></div>
+  <div class="mod-head"><div class="eyebrow">Week ${w.n} · ${w.topic}</div><h1>${w.habit}</h1><p class="lede">${w.lede}</p></div>
   ${w.tracks.length ? `<h2>Guided sessions</h2>${w.tracks.map(track).join('')}` : ''}
   <h2>The practice</h2>${w.blocks.map(block).join('')}
-  <h2>This week’s habit</h2><div class="card"><h3>${w.habit}</h3>${grid}</div>
+  <h2>Tick it off each day</h2><div class="card">${grid}</div>
   <div class="complete">${check('done.e'+w.n, 'Mark this week complete')}</div>
   <div class="pager">${prev?`<a href="#/e/${prev.n}">← Week ${prev.n}</a>`:'<span></span>'}${next?`<a href="#/e/${next.n}">Week ${next.n} →</a>`:'<a href="#/earth">Back to program →</a>'}</div>`;
 }
