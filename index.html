@@ -1,0 +1,611 @@
+<!doctype html>
+<html lang="en-AU">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Coming Down to Earth</title>
+<meta name="description" content="A four-week, body-first psychedelic integration program. Your notes and ticks stay on your device.">
+<meta name="theme-color" content="#F4EFE6" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#1C1915" media="(prefers-color-scheme: dark)">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="Down to Earth">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" type="image/png" href="icons/icon-192.png">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+<style>
+:root{
+  --bg:#F4EFE6; --card:#FBF8F2; --ink:#2E2A24; --muted:#6F675C; --line:#E2D9CA;
+  --clay:#B5603A; --clay-soft:#F1DDD1; --moss:#5E6B4E; --moss-soft:#E3E7DA;
+  --warn-bg:#F7E6D8; --warn-ink:#7A3618;
+  --serif:"Iowan Old Style","Palatino Linotype",Palatino,Georgia,serif;
+  --sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  --r:14px;
+}
+@media (prefers-color-scheme: dark){
+  :root{
+    --bg:#1C1915; --card:#25211C; --ink:#EDE6DA; --muted:#A99F90; --line:#3A342C;
+    --clay:#D98258; --clay-soft:#3E2A20; --moss:#9AAA86; --moss-soft:#2B3125;
+    --warn-bg:#3E2A20; --warn-ink:#F0C2A6;
+  }
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.55 var(--sans);
+  padding:env(safe-area-inset-top) 0 calc(76px + env(safe-area-inset-bottom));}
+main{max-width:640px;margin:0 auto;padding:16px 16px 32px}
+h1,h2,h3{font-family:var(--serif);font-weight:600;line-height:1.2;margin:0}
+h1{font-size:32px;letter-spacing:-.01em}
+h2{font-size:22px;margin:28px 0 10px}
+h3{font-size:18px}
+p{margin:0 0 10px}
+a{color:var(--clay)}
+button{font:inherit;color:inherit}
+.eyebrow{font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--clay);font-weight:600}
+.muted{color:var(--muted)}
+.small{font-size:14px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:16px;margin:12px 0}
+.hero{padding:20px 0 4px}
+.hero p{font-size:17px;color:var(--muted);margin-top:8px}
+.stats{display:flex;gap:8px;margin:16px 0}
+.stat{flex:1;background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:10px;text-align:center}
+.stat b{display:block;font:600 26px var(--serif);color:var(--clay)}
+.stat span{font-size:12px;color:var(--muted)}
+.bar{height:8px;background:var(--line);border-radius:99px;overflow:hidden;margin:8px 0 4px}
+.bar i{display:block;height:100%;background:var(--moss);border-radius:99px;transition:width .3s}
+.cta{display:flex;align-items:center;justify-content:space-between;gap:12px;text-decoration:none;color:inherit;
+  background:var(--moss);color:#fff;border-radius:var(--r);padding:16px 18px;margin:16px 0}
+.cta h3{color:#fff}
+.cta .arrow{font-size:24px}
+.week{margin-top:24px}
+.week-head{display:flex;align-items:baseline;gap:10px;margin-bottom:6px}
+.week-num{font:600 28px var(--serif);color:var(--clay)}
+.mod{display:flex;align-items:center;gap:12px;text-decoration:none;color:inherit;background:var(--card);
+  border:1px solid var(--line);border-radius:var(--r);padding:12px 14px;margin:8px 0;min-height:56px}
+.mod .code{font:600 13px var(--sans);color:var(--muted);width:30px;flex:none}
+.mod .t{flex:1}
+.mod .t b{display:block;font-weight:600}
+.mod .t span{font-size:13px;color:var(--muted)}
+.dot{width:24px;height:24px;border-radius:50%;border:2px solid var(--line);flex:none;display:grid;place-items:center;font-size:14px;color:#fff}
+.dot.on{background:var(--moss);border-color:var(--moss)}
+.back{display:inline-flex;align-items:center;gap:6px;text-decoration:none;color:var(--muted);padding:8px 0;font-size:15px}
+.mod-head{padding:4px 0 8px}
+.mod-head h1{margin:6px 0}
+.mod-head .lede{font:italic 18px var(--serif);color:var(--muted)}
+.sec h4{font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--moss);margin:0 0 6px}
+ul.plain{margin:0;padding-left:20px}
+ul.plain li{margin:4px 0}
+.note{background:var(--clay-soft);border-radius:var(--r);padding:14px 16px;margin:12px 0}
+.warn{background:var(--warn-bg);color:var(--warn-ink);border-radius:var(--r);padding:14px 16px;margin:12px 0;font-weight:500}
+.practice .ph{display:flex;justify-content:space-between;align-items:baseline;gap:8px}
+.practice .dur{font-size:13px;color:var(--muted);white-space:nowrap}
+ol.steps{margin:10px 0 12px;padding-left:22px}
+ol.steps li{margin:6px 0}
+.check{display:flex;align-items:center;gap:12px;padding:10px 0;cursor:pointer;min-height:44px;-webkit-tap-highlight-color:transparent}
+.check input{position:absolute;opacity:0;pointer-events:none}
+.box{width:26px;height:26px;border:2px solid var(--muted);border-radius:8px;flex:none;display:grid;place-items:center;transition:.15s}
+.check input:checked + .box{background:var(--moss);border-color:var(--moss)}
+.check input:checked + .box::after{content:"";width:7px;height:13px;border:solid #fff;border-width:0 3px 3px 0;transform:rotate(45deg) translate(-1px,-2px)}
+.check input:focus-visible + .box{outline:2px solid var(--clay);outline-offset:2px}
+.check .lbl{flex:1}
+.check .lbl small{display:block;color:var(--muted);font-size:13px}
+.done-btn{display:flex;width:100%;align-items:center;gap:12px;background:var(--moss-soft);border:0;border-radius:12px;padding:10px 14px;cursor:pointer;text-align:left}
+.field{margin:12px 0}
+.field label{display:block;font-weight:600;font-size:15px;margin-bottom:6px}
+textarea,input[type=text],input[type=date],input[type=number]{width:100%;font:16px/1.5 var(--sans);color:var(--ink);background:var(--bg);
+  border:1px solid var(--line);border-radius:10px;padding:10px 12px;resize:none;-webkit-appearance:none;appearance:none}
+textarea{min-height:48px;overflow:hidden}
+textarea:focus,input:focus{outline:2px solid var(--clay);outline-offset:0;border-color:transparent}
+.prompt label{font:italic 17px var(--serif);font-weight:400}
+.yn{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:10px 0;border-bottom:1px solid var(--line)}
+.yn:last-of-type{border-bottom:0}
+.yn span{flex:1;font-size:15px}
+.seg{display:flex;gap:6px;flex:none}
+.seg button{min-width:48px;min-height:40px;border:1px solid var(--line);background:var(--bg);border-radius:10px;cursor:pointer;font-size:15px}
+.seg button.on{background:var(--clay);border-color:var(--clay);color:#fff}
+.scale{display:flex;gap:6px}
+.scale button{flex:1;min-height:44px;border:1px solid var(--line);background:var(--bg);border-radius:10px;cursor:pointer;font-weight:600}
+.scale button.on{background:var(--moss);border-color:var(--moss);color:#fff}
+.scale-ends{display:flex;justify-content:space-between;font-size:12px;color:var(--muted);margin-top:4px}
+.row{border-top:1px solid var(--line);padding:12px 0 4px}
+.row:first-of-type{border-top:0;padding-top:0}
+.row-title{font-size:13px;color:var(--muted);font-weight:600;margin-bottom:4px}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.grid2 .field{margin:6px 0}
+.grid2 label{font-size:13px;font-weight:500;color:var(--muted)}
+.complete{margin:28px 0 8px;background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:6px 16px}
+.pager{display:flex;justify-content:space-between;gap:12px;margin-top:12px}
+.pager a{text-decoration:none;font-size:15px;padding:10px 0}
+.days{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:4px;margin:8px 0}
+.day{min-width:0;min-height:56px;padding:4px 0;border-radius:10px;border:1px solid var(--line);background:var(--card);text-decoration:none;color:inherit;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;font-size:13px;position:relative}
+.day b{font-size:16px}
+.day.logged{background:var(--moss-soft);border-color:var(--moss)}
+.day.today{outline:2px solid var(--clay);outline-offset:1px}
+.day .pips{display:flex;gap:2px;margin-top:2px}
+.day .pips i{width:5px;height:5px;border-radius:50%;background:var(--moss)}
+.tabs{display:flex;gap:6px;overflow-x:auto;margin:12px 0}
+.tabs button{flex:none;border:1px solid var(--line);background:var(--card);border-radius:99px;padding:8px 14px;cursor:pointer;font-size:14px}
+.tabs button.on{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.crisis a{display:flex;justify-content:space-between;align-items:center;text-decoration:none;color:inherit;padding:12px 0;border-bottom:1px solid var(--line);min-height:48px}
+.crisis a:last-child{border-bottom:0}
+.crisis a b{color:var(--clay);font-size:17px}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;border:1px solid var(--line);background:var(--card);border-radius:12px;
+  padding:10px 16px;cursor:pointer;min-height:44px;font-size:15px;text-decoration:none;color:inherit}
+.btn.primary{background:var(--clay);border-color:var(--clay);color:#fff}
+.btn.danger{color:#B23B2A}
+.btns{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}
+nav.tabbar{position:fixed;left:0;right:0;bottom:0;background:var(--card);border-top:1px solid var(--line);
+  display:flex;justify-content:space-around;padding:6px 8px calc(6px + env(safe-area-inset-bottom));z-index:10}
+nav.tabbar a{flex:1;display:flex;flex-direction:column;align-items:center;gap:2px;text-decoration:none;color:var(--muted);font-size:11px;padding:4px 0;min-height:48px;justify-content:center}
+nav.tabbar a.on{color:var(--clay)}
+nav.tabbar svg{width:24px;height:24px;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.saved{position:fixed;left:50%;transform:translateX(-50%) translateY(20px);bottom:calc(84px + env(safe-area-inset-bottom));background:var(--ink);color:var(--bg);
+  padding:6px 14px;border-radius:99px;font-size:13px;opacity:0;transition:.25s;pointer-events:none;z-index:20}
+.saved.show{opacity:.92;transform:translateX(-50%) translateY(0)}
+.install{background:var(--moss-soft);border-radius:var(--r);padding:14px 16px;margin:12px 0;display:flex;gap:12px;align-items:flex-start}
+.install p{margin:0;font-size:14px}
+.install .x{background:none;border:0;font-size:20px;line-height:1;cursor:pointer;color:var(--muted);padding:0 4px}
+.foot{font-size:12px;color:var(--muted);margin-top:32px;text-align:center}
+</style>
+</head>
+<body>
+<main id="app" aria-live="polite"></main>
+<div class="saved" id="saved">Saved on this device</div>
+<nav class="tabbar" aria-label="Main">
+  <a href="#/" data-tab="home"><svg viewBox="0 0 24 24"><path d="M3 11l9-7 9 7v9a1 1 0 0 1-1 1h-5v-6h-6v6H4a1 1 0 0 1-1-1z"/></svg>Program</a>
+  <a href="#/today" data-tab="today"><svg viewBox="0 0 24 24"><circle cx="12" cy="13" r="4"/><path d="M12 3v3M4.2 7.2l2 2M19.8 7.2l-2 2M2 17h20M5 21h14"/></svg>Today</a>
+  <a href="#/tracker" data-tab="tracker"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="17" rx="2"/><path d="M3 9h18M8 2v4M16 2v4"/></svg>Tracker</a>
+  <a href="#/help" data-tab="help"><svg viewBox="0 0 24 24"><path d="M12 21s-7-4.5-9.5-9A5.5 5.5 0 0 1 12 6a5.5 5.5 0 0 1 9.5 6c-2.5 4.5-9.5 9-9.5 9z"/></svg>Support</a>
+</nav>
+
+<script>
+/* ---------- Program content (from the Coming Down to Earth PDF) ---------- */
+const WEEKS = [
+  {n:1, word:'One', name:'Prep', sub:'Safety, foundations, body first.'},
+  {n:2, word:'Two', name:'The System', sub:'A daily integration practice in place of a protocol.'},
+  {n:3, word:'Three', name:'The Deep Work', sub:'The emotional inventory most programs skip.'},
+  {n:4, word:'Four', name:'The New Identity', sub:'Your 90-day plan.'}
+];
+
+const MODULES = [
+ {id:1, week:1, title:'Is this for you?', output:'Intake screener',
+  lede:'Integration starts with honesty about whether this is safe for you, right now.',
+  blocks:[
+   {t:'p', h:'Why this matters', x:'Psychedelic experiences can bring up powerful material. For many adults the serious risks are uncommon, but some people carry much higher risk. Knowing where you stand is the most caring first step.'},
+   {t:'ul', h:'Higher-risk factors', items:[
+     'A personal or close-family history of psychosis, schizophrenia or bipolar disorder.',
+     'Taking lithium, antidepressants or other psychiatric medication. Some combinations are dangerous and need a doctor’s advice.',
+     'Heart conditions or high blood pressure.',
+     'Pregnancy or breastfeeding.',
+     'Thoughts of self-harm, active crisis, or a recent major loss or upheaval.']},
+   {t:'p', h:'The legal picture in Australia', x:'Psilocybin is a prohibited substance. Since July 2023, authorised psychiatrists can prescribe it only for treatment-resistant depression. Outside that pathway, possession and use are illegal. Integration work itself is legal, and everything in this program can be done whether or not you’ve had an experience.'},
+   {t:'yesno', h:'Self-screener', k:'m1.s', items:[
+     'I have a personal or close-family history of psychosis or bipolar disorder.',
+     'I take lithium, antidepressants or other psychiatric medication.',
+     'I have a heart condition or high blood pressure.',
+     'I’m pregnant or breastfeeding.',
+     'I’ve had thoughts of self-harm in the past month.',
+     'I’m in the middle of a crisis or major loss.'],
+    warn:'You answered “yes” to at least one question. Please pause here and talk with your GP or a psychologist before going further.'},
+   {t:'prompts', k:'m1.p', items:['What’s drawing me to this work right now?','What would I want a trusted friend to know before I begin?']}
+ ]},
+ {id:2, week:1, title:'The body first', output:'Personal grounding card',
+  lede:'Insight lands best in a body that feels safe enough to receive it.',
+  blocks:[
+   {t:'p', h:'Your window of tolerance', x:'The window of tolerance is the zone where you can feel things without being overwhelmed. Above it is hyperarousal: racing heart, anxiety, panic, anger. Below it is hypoarousal: numbness, flatness, shutting down. Integration happens inside the window. These three practices help you get back there.'},
+   {t:'practice', id:'orient', h:'Orienting', dur:'3 minutes', steps:[
+     'Sit comfortably and let your eyes move slowly around the room.',
+     'Let them rest on anything that’s pleasant or neutral: a colour, a plant, the light.',
+     'Name five things you can see, out loud or silently.',
+     'Notice any small shift: a longer breath, softer shoulders, a swallow.']},
+   {t:'practice', id:'breath', h:'Slow exhale breathing', dur:'5 minutes', steps:[
+     'Breathe in gently through your nose for a count of 4.',
+     'Breathe out slowly through your mouth for a count of 6.',
+     'Keep the breath soft, not forced.',
+     'If you feel dizzy, return to normal breathing.']},
+   {t:'practice', id:'feet', h:'Feet on the ground', dur:'2 minutes', steps:[
+     'Press both feet into the floor and feel the weight of your body.',
+     'Push your palms into a wall or your thighs for a few seconds, then release.',
+     'Say to yourself: “I’m here. I’m safe enough right now.”']},
+   {t:'fields', h:'My grounding card', k:'m2.card', items:[
+     'When I’m above my window, I notice:',
+     'When I’m below my window, I notice:',
+     'The practice that helps most:',
+     'One thing I can see, touch or smell that settles me:']}
+ ]},
+ {id:3, week:1, title:'Your support container', output:'Support map and written intention',
+  lede:'No one integrates alone. A little structure holds a lot.',
+  blocks:[
+   {t:'p', h:'What integration is', x:'Integration is the slow process of making sense of an experience and weaving it into everyday life. It happens over weeks and months, not in one sitting.'},
+   {t:'ul', h:'What it isn’t', items:['It isn’t therapy, though therapy can sit alongside it.','It isn’t about finding one big answer.','It isn’t about becoming a different person overnight.']},
+   {t:'p', h:'Choosing support people', x:'Choose one or two people who listen without judging, keep things private, and won’t try to talk you out of your experience or into their interpretation of it. Let them know you’re doing this work and what kind of support you’d like.'},
+   {t:'practice', id:'intention', h:'Setting an intention', dur:'10 minutes', steps:[
+     'Sit quietly and take five slow breaths.',
+     'Ask yourself: “What do I hope to understand or carry forward from this?”',
+     'Write the first honest answer, even if it’s messy.',
+     'Shape it into one sentence that starts with “I’m open to…”. An intention is a direction, not a demand.']},
+   {t:'fields', h:'My support map', k:'m3.map', items:[
+     'Support person 1 and how to reach them:',
+     'Support person 2 and how to reach them:',
+     'Professional support (GP, psychologist):',
+     'What I’d like from them:']},
+   {t:'fields', k:'intention', items:['My intention: I’m open to…'], single:true},
+   {t:'prompts', k:'m3.p', items:['Who in my life feels safe to be honest with?','What kind of support do I find hard to ask for?']}
+ ]},
+ {id:4, week:2, title:'Daily rhythm', output:'Daily practice sheet',
+  lede:'Small, steady and repeated beats big and occasional.',
+  blocks:[
+   {t:'p', h:'Why a rhythm', x:'Insight fades if it has nowhere to land. A short daily practice gives it somewhere to go. Keep it simple enough that you’ll still do it on a hard day.'},
+   {t:'practice', id:'morning', h:'Morning check-in', dur:'15 minutes', steps:[
+     'Arrive (2 min). Sit, feet on the floor, and take three slow breaths.',
+     'Body scan (5 min). Move your attention slowly from your head to your feet. Notice tightness, warmth, ease or numbness, without trying to change anything.',
+     'Breath (3 min). Slow exhale breathing: in for 4, out for 6.',
+     'Journal (5 min). Answer one prompt: “What’s here in me this morning?”']},
+   {t:'practice', id:'evening', h:'Evening wind-down', dur:'5 minutes', steps:[
+     'Write down three moments from today, big or small.',
+     'Name one thing you’re ready to set down for tonight.',
+     'Take five slow breaths with a long exhale, then lights down.']},
+   {t:'note', x:'Tick these off each day on the <a href="#/today">Today</a> screen, where you can also write your morning journal and evening moments.'},
+   {t:'fields', h:'My daily practice sheet', k:'m4.sheet', items:[
+     'Time and place for my morning check-in:',
+     'Time for my evening wind-down:',
+     'What might get in the way:',
+     'My two-minute version for hard days:']},
+   {t:'prompts', k:'m4.p', items:['When in my day do I feel most like myself?','What would make this practice feel like a gift, not a chore?']}
+ ]},
+ {id:5, week:2, title:'Tracking what matters', output:'28-day tracker',
+  lede:'Patterns are easier to see on paper than in your head.',
+  blocks:[
+   {t:'p', h:'Why track', x:'Integration is quiet and gradual. A simple daily log helps you notice changes you’d otherwise miss, and shows you what supports you and what doesn’t. It takes two minutes.'},
+   {t:'ul', h:'What to log each day', items:['Mood from 1 (very low) to 5 (very good).','Sleep: hours, and whether it felt restful.','Energy from 1 (empty) to 5 (full).','Insight: one sentence about anything you noticed or understood.']},
+   {t:'link', href:'#/tracker', x:'Open your 28-day tracker', sub:'Log each day and do your weekly reviews'}
+ ]},
+ {id:6, week:2, title:'When it gets hard', output:'Completed safety plan',
+  lede:'Hard days are part of integration. They aren’t a sign you’ve done it wrong.',
+  blocks:[
+   {t:'ul', h:'What can resurface', items:['Anxiety, restlessness or low mood.','Feeling disconnected from yourself or the world.','Old memories or strong emotions arriving without warning.','Disrupted sleep or vivid dreams.']},
+   {t:'practice', id:'ground', h:'Back to ground', dur:'5 minutes', steps:[
+     'Name it. Say, “This is a hard moment, and it will pass.”',
+     'Feet. Press your feet into the floor and feel the ground hold you.',
+     'Exhale. Take five long, slow out-breaths.',
+     'Orient. Name five things you can see.',
+     'Reach out. Contact a support person if it doesn’t ease.']},
+   {t:'ul', h:'Get help now if', warn:true, items:['You have thoughts of harming yourself.','You haven’t slept properly for several nights in a row.','You feel you’re losing touch with what’s real.','You can’t manage daily life.']},
+   {t:'fields', h:'My safety plan', k:'safety', items:[
+     'My early warning signs:',
+     'Things that help me settle:',
+     'People I can call:',
+     'My GP or psychologist:',
+     'A safe place I can go:']},
+   {t:'crisis'}
+ ]},
+ {id:7, week:3, title:'Emotional inventory', output:'Body map and inventory list',
+  lede:'Gently taking stock of what’s still asking for attention.',
+  blocks:[
+   {t:'p', h:'Small pieces, at your own pace', x:'This module uses titration: working with a small piece of a feeling at a time, rather than all of it at once. You also practise pendulation, moving your attention between something difficult and something that feels steady. This keeps you inside your window of tolerance.'},
+   {t:'practice', id:'somatic', h:'Somatic mapping', dur:'15 minutes', steps:[
+     'Find a resource first: a place in your body that feels neutral or okay. Rest there for a few breaths.',
+     'Choose one thing that surfaced. Rate its intensity from 0 to 10. Only work with something at 5 or below today.',
+     'Ask: “Where do I feel this in my body?” Describe it in plain words: tight, heavy, hot, buzzing.',
+     'Stay with it for three breaths, then return to your resource.',
+     'Move between the two a few times. Stop whenever you need to.']},
+   {t:'table', h:'My inventory', k:'m7.inv', rows:5, label:'Item', cols:[
+     {k:'what', l:'What surfaced', wide:true},{k:'feel', l:'Feeling'},{k:'where', l:'Where in body'},
+     {k:'int', l:'Intensity 0–10', num:true},{k:'open', l:'Still unfinished', check:true}]},
+   {t:'prompts', k:'m7.p', items:['What have I been avoiding looking at?','What feels complete, and what still feels open?']}
+ ]},
+ {id:8, week:3, title:'Meaning without bypass', output:'Three insights, each with one small action',
+  lede:'An insight is a seed. Action is how it grows.',
+  blocks:[
+   {t:'p', h:'Insight and action', x:'Big experiences can bring clarity that feels life-changing. But clarity without a small, real step tends to fade within weeks. The work is linking each insight to one action you can actually take.'},
+   {t:'ul', h:'Signs of spiritual bypassing', intro:'Spiritual bypassing is using big ideas or experiences to skip over real feelings. Watch for:', items:[
+     'Using “everything happens for a reason” to avoid grief or anger.','Feeling more evolved than the people around you.',
+     'Avoiding hard conversations because “it’s all love”.','Wanting to make huge, sudden life changes.']},
+   {t:'note', x:'<b>A gentle rule of thumb.</b> Give big decisions time. Let an insight sit for several weeks before you act on anything major: leaving a relationship, quitting a job, moving house.'},
+   {t:'table', h:'Insight to action', k:'m8.ia', rows:3, label:'Insight', cols:[
+     {k:'ins', l:'Insight', wide:true},{k:'act', l:'One small action', wide:true},{k:'by', l:'By when', date:true},{k:'done', l:'Action done', check:true}]},
+   {t:'prompts', k:'m8.p', items:['Which insight keeps coming back to me?','What feeling might I be stepping around?']}
+ ]},
+ {id:9, week:3, title:'Relationships and boundaries', output:'Boundaries reflection and one planned conversation',
+  lede:'Change ripples outward. Let it move at a pace your relationships can hold.',
+  blocks:[
+   {t:'p', h:'Bringing it home', x:'The people around you haven’t been through what you’ve been through. Some will be curious, some uneasy. You don’t owe anyone the full story. Share what feels right, with people who’ve earned it.'},
+   {t:'p', h:'Boundaries, simply', x:'A boundary is about what you will do, not what others must do. For example: “If the conversation turns critical, I’ll step away and come back to it later.”'},
+   {t:'ul', h:'When to wait', items:['When you’re still feeling raw or unsettled.','When the other person is stressed or distracted.','When you’re hoping to change their mind rather than share your own truth.']},
+   {t:'fields', h:'Conversation planner', k:'m9.conv', items:[
+     'Who I want to talk with:','What I want them to know:','What I’m asking for, if anything:','A good time and place:','If it goes badly, I’ll:']},
+   {t:'checks', k:'m9.c', items:['I’ve had this conversation']},
+   {t:'prompts', k:'m9.p', items:['Which relationships feel nourishing right now?','Where do I need a clearer boundary?']}
+ ]},
+ {id:10, week:4, title:'Embodying the shift', output:'Three keystone habits',
+  lede:'Who you’re becoming shows up in what you do each day.',
+  blocks:[
+   {t:'p', h:'Small habits carry big change', x:'Lasting change rarely comes from willpower. It comes from small actions repeated until they become part of who you are. Start smaller than feels necessary.'},
+   {t:'p', h:'Anchor it', x:'Attach each new habit to something you already do: “After I [existing habit], I will [new habit].” For example: “After I put the kettle on, I’ll take three slow breaths.”'},
+   {t:'practice', id:'keystone', h:'Choosing keystone habits', dur:'10 minutes', steps:[
+     'Look back at your insight-to-action table from <a href="#/m/8">Module 8</a>.',
+     'Pick three actions that matter most.',
+     'Shrink each one to a two-minute version.',
+     'Anchor each to an existing part of your day.']},
+   {t:'habits'},
+   {t:'note', x:'Once your habits are written, you can tick them off each day on the <a href="#/today">Today</a> screen.'},
+   {t:'prompts', k:'m10.p', items:['What would the most grounded version of me do each morning?','Which habit would make the others easier?']}
+ ]},
+ {id:11, week:4, title:'Your 90-day plan', output:'One-page 90-day plan',
+  lede:'Four weeks to begin. Ninety days to let it settle into your life.',
+  blocks:[
+   {t:'ul', h:'Three months, three phases', items:['<b>Month one: settle.</b> Keep your daily rhythm and three habits steady.','<b>Month two: deepen.</b> Revisit your inventory and take one next step.','<b>Month three: live it.</b> Notice what’s become natural and what still needs care.']},
+   {t:'p', h:'Check-in rituals', x:'At weeks 6, 9 and 12, set aside 30 minutes. Reread your intention and tracker, then ask: What’s changed? What’s held? What needs more support?'},
+   {t:'ul', h:'Signs you need more support', intro:'If you notice these, talk with your GP or a psychologist, ideally one experienced in integration.', items:['Hard feelings that keep building rather than easing.','Sleep, work or relationships steadily getting harder.','Feeling stuck in the same place for weeks.']},
+   {t:'fields', h:'My one-page 90-day plan', k:'intention', items:['My intention:'], single:true},
+   {t:'fields', k:'m11.plan', items:['Month one focus:','Month two focus:','Month three focus:','My support people:']},
+   {t:'checkins'}
+ ]}
+];
+
+const REVIEW = ['What patterns do I notice across the week?','What helped on my better days?','What was happening on my harder days?','What’s one small thing to try next week?'];
+const CRISIS = [['Lifeline','13 11 14','131114'],['13YARN','13 92 76','139276'],['Beyond Blue','1300 22 4636','1300224636'],['Emergency','000','000']];
+
+/* ---------- Storage: everything lives in this device's localStorage ---------- */
+const KEY = 'cdte-state-v1';
+let S = {};
+try { S = JSON.parse(localStorage.getItem(KEY)) || {}; } catch(e) { S = {}; }
+const get = k => S[k];
+let saveTimer;
+function set(k, v){
+  if (v === '' || v === false || v == null) delete S[k]; else S[k] = v;
+  clearTimeout(saveTimer);
+  saveTimer = setTimeout(persist, 250);
+}
+function persist(){
+  try {
+    localStorage.setItem(KEY, JSON.stringify(S));
+    const el = document.getElementById('saved');
+    el.classList.add('show'); clearTimeout(el._t); el._t = setTimeout(() => el.classList.remove('show'), 1200);
+  } catch(e) { alert('Sorry, this device could not save. Your storage may be full.'); }
+}
+// Ask the browser not to clear our data under storage pressure.
+if (navigator.storage && navigator.storage.persist) navigator.storage.persist().catch(()=>{});
+
+/* ---------- Dates ---------- */
+const iso = d => { const z = new Date(d.getTime() - d.getTimezoneOffset()*6e4); return z.toISOString().slice(0,10); };
+const todayISO = () => iso(new Date());
+if (!get('start')) { S.start = todayISO(); persist(); }
+function dayNum(){
+  const [y,m,d] = get('start').split('-').map(Number);
+  const diff = Math.floor((new Date(new Date().toDateString()) - new Date(y, m-1, d)) / 864e5);
+  return diff + 1;
+}
+function dateForDay(n){
+  const [y,m,d] = get('start').split('-').map(Number);
+  return new Date(y, m-1, d + n - 1);
+}
+const fmt = (d, o={weekday:'long', day:'numeric', month:'long'}) => d.toLocaleDateString('en-AU', o);
+
+/* ---------- Render helpers ---------- */
+const esc = s => String(s ?? '').replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const area = (k, label, cls='') => `<div class="field ${cls}"><label for="${k}">${label}</label><textarea id="${k}" data-k="${k}" rows="1">${esc(get(k))}</textarea></div>`;
+const check = (k, label, sub='') => `<label class="check"><input type="checkbox" data-k="${k}" ${get(k)?'checked':''}><span class="box"></span><span class="lbl">${label}${sub?`<small>${sub}</small>`:''}</span></label>`;
+const scale = (k, lo, hi) => `<div class="scale" role="group">${[1,2,3,4,5].map(v=>`<button type="button" data-k="${k}" data-v="${v}" class="${get(k)==v?'on':''}" aria-pressed="${get(k)==v}">${v}</button>`).join('')}</div><div class="scale-ends"><span>${lo}</span><span>${hi}</span></div>`;
+const modDone = id => !!get('done.m'+id);
+const doneCount = () => MODULES.filter(m => modDone(m.id)).length;
+const practiceCount = id => Object.keys(S).filter(k => k.startsWith('p.'+id+'.')).length;
+
+function block(b){
+  switch(b.t){
+    case 'p': return `<div class="card sec"><h4>${b.h}</h4><p>${b.x}</p></div>`;
+    case 'ul': return `<div class="${b.warn?'warn':'card'} sec"><h4 ${b.warn?'style="color:inherit"':''}>${b.h}</h4>${b.intro?`<p>${b.intro}</p>`:''}<ul class="plain">${b.items.map(i=>`<li>${i}</li>`).join('')}</ul></div>`;
+    case 'note': return `<div class="note">${b.x}</div>`;
+    case 'link': return `<a class="cta" href="${b.href}"><div><h3>${b.x}</h3><span class="small">${b.sub}</span></div><span class="arrow">→</span></a>`;
+    case 'practice': {
+      const k = 'p.'+b.id+'.'+todayISO(), n = practiceCount(b.id);
+      return `<div class="card practice"><div class="ph"><h3>${b.h}</h3><span class="dur">${b.dur}</span></div>
+        <ol class="steps">${b.steps.map(s=>`<li>${s}</li>`).join('')}</ol>
+        <div class="done-btn">${check(k, 'I did this today', n ? `Practised ${n} time${n>1?'s':''} so far` : 'Tick it each time you practise')}</div></div>`;
+    }
+    case 'fields': return `<div class="card">${b.h?`<h3>${b.h}</h3>`:''}${b.items.map((l,i)=>area(b.single ? b.k : b.k+'.'+i, l)).join('')}</div>`;
+    case 'prompts': return `<h2>Reflect</h2><div class="card">${b.items.map((l,i)=>area(b.k+'.'+i, '— '+l, 'prompt')).join('')}</div>`;
+    case 'checks': return `<div class="card">${b.items.map((l,i)=>check(b.k+'.'+i, l)).join('')}</div>`;
+    case 'yesno': {
+      const anyYes = b.items.some((_,i)=>get(b.k+'.'+i)==='yes');
+      return `<div class="card"><h3>${b.h}</h3><p class="small muted">Private to you. Nothing leaves this device.</p>
+        ${b.items.map((q,i)=>{const k=b.k+'.'+i, v=get(k); return `<div class="yn"><span>${q}</span><div class="seg">
+          <button type="button" data-k="${k}" data-v="yes" class="${v==='yes'?'on':''}">Yes</button>
+          <button type="button" data-k="${k}" data-v="no" class="${v==='no'?'on':''}">No</button></div></div>`;}).join('')}
+        </div>${anyYes?`<div class="warn">${b.warn}</div>`:''}`;
+    }
+    case 'table': return `<div class="card"><h3>${b.h}</h3>${Array.from({length:b.rows},(_,r)=>`<div class="row"><div class="row-title">${b.label} ${r+1}</div>
+        ${b.cols.filter(c=>c.wide).map(c=>area(`${b.k}.${r}.${c.k}`, c.l)).join('')}
+        <div class="grid2">${b.cols.filter(c=>!c.wide && !c.check).map(c=>{const k=`${b.k}.${r}.${c.k}`;
+          return `<div class="field"><label for="${k}">${c.l}</label><input id="${k}" data-k="${k}" type="${c.date?'date':c.num?'number':'text'}" ${c.num?'inputmode="numeric" min="0" max="10"':''} value="${esc(get(k))}"></div>`;}).join('')}</div>
+        ${b.cols.filter(c=>c.check).map(c=>check(`${b.k}.${r}.${c.k}`, c.l)).join('')}</div>`).join('')}</div>`;
+    case 'habits': return `<div class="card"><h3>My three keystone habits</h3>${[0,1,2].map(i=>`<div class="row"><div class="row-title">Habit ${i+1}</div>
+        <div class="field"><label for="habit.${i}.after">After I…</label><input id="habit.${i}.after" type="text" data-k="habit.${i}.after" value="${esc(get('habit.'+i+'.after'))}"></div>
+        <div class="field"><label for="habit.${i}.will">I will…</label><input id="habit.${i}.will" type="text" data-k="habit.${i}.will" value="${esc(get('habit.'+i+'.will'))}"></div></div>`).join('')}</div>`;
+    case 'checkins': return `<div class="card"><h3>Check-in rituals</h3><p class="small muted">30 minutes each. Reread your intention and tracker. What’s changed? What’s held? What needs more support?</p>
+        ${[6,9,12].map(w=>{const d=dateForDay((w-1)*7+1); return check('checkin.w'+w, `Week ${w} check-in`, fmt(d,{day:'numeric',month:'long',year:'numeric'}));}).join('')}
+        ${[6,9,12].map(w=>area('checkin.w'+w+'.notes', `Week ${w} notes`)).join('')}</div>`;
+    case 'crisis': return crisisCard();
+  }
+  return '';
+}
+const crisisCard = () => `<div class="card crisis"><h3>Crisis support, 24 hours</h3>${CRISIS.map(([n,s,t])=>`<a href="tel:${t}"><span>${n}</span><b>${s}</b></a>`).join('')}</div>`;
+
+/* ---------- Views ---------- */
+function vHome(){
+  const done = doneCount(), dn = dayNum();
+  const dayLine = dn < 1 ? `Starts ${fmt(dateForDay(1))}` : dn <= 28 ? `Day ${dn} of 28` : dn <= 90 ? `Day ${dn} of your 90-day plan` : 'Program complete';
+  return `
+  ${installBanner()}
+  <div class="hero"><div class="eyebrow">A psychedelic integration program</div><h1>Coming Down to Earth</h1>
+    <p>Four weeks to ground what surfaced, settle the nervous system and carry the insight into everyday life.</p></div>
+  <div class="card"><div style="display:flex;justify-content:space-between;font-size:14px"><b>${dayLine}</b><span class="muted">${done} of 11 modules</span></div>
+    <div class="bar"><i style="width:${done/11*100}%"></i></div></div>
+  <a class="cta" href="#/today"><div><h3>Today’s practice</h3><span class="small">Check-in, wind-down and your daily log</span></div><span class="arrow">→</span></a>
+  ${WEEKS.map(w=>`<section class="week"><div class="week-head"><span class="week-num">0${w.n}</span><div><div class="eyebrow">Week ${w.word}</div><h2 style="margin:2px 0 0">${w.name}</h2></div></div>
+    <p class="muted small">${w.sub}</p>
+    ${MODULES.filter(m=>m.week===w.n).map(m=>`<a class="mod" href="#/m/${m.id}"><span class="code">M${m.id}</span><span class="t"><b>${m.title}</b><span>${m.output}</span></span><span class="dot ${modDone(m.id)?'on':''}">${modDone(m.id)?'✓':''}</span></a>`).join('')}
+  </section>`).join('')}
+  <h2>Your data</h2>
+  <div class="card"><p class="small">Everything you write and tick is saved on this device only. Nothing is sent anywhere. Make a backup now and then, especially before changing phones.</p>
+    <div class="field"><label for="start">Program start date</label><input type="date" id="start" data-k="start" value="${esc(get('start'))}"></div>
+    <div class="btns"><button class="btn" data-act="export">Save a backup</button><button class="btn" data-act="import">Restore a backup</button><button class="btn danger" data-act="reset">Clear everything</button></div></div>
+  <p class="foot">This is integration support. It is not therapy, medical advice or supply. If you have mental health concerns, please see your GP or a psychologist.</p>`;
+}
+
+function vModule(id){
+  const m = MODULES.find(x=>x.id===id); if (!m) return vHome();
+  const w = WEEKS[m.week-1], prev = MODULES.find(x=>x.id===id-1), next = MODULES.find(x=>x.id===id+1);
+  return `<a class="back" href="#/">← Program</a>
+  <div class="mod-head"><div class="eyebrow">Week ${w.word} · ${w.name} · Module ${m.id}</div><h1>${m.title}</h1><p class="lede">${m.lede}</p></div>
+  ${m.blocks.map(block).join('')}
+  <div class="complete">${check('done.m'+m.id, 'Mark this module complete', 'Output: '+m.output)}</div>
+  <div class="pager">${prev?`<a href="#/m/${prev.id}">← M${prev.id}</a>`:'<span></span>'}${next?`<a href="#/m/${next.id}">M${next.id} →</a>`:'<a href="#/">Back to program →</a>'}</div>
+  <p class="foot">Integration support only, not therapy, medical advice or supply.</p>`;
+}
+
+function vDay(n, isToday){
+  const p = 'd'+n+'.', d = dateForDay(n);
+  const habits = [0,1,2].filter(i=>get('habit.'+i+'.will'));
+  const out28 = n < 1 || n > 28;
+  return `${isToday?'':`<a class="back" href="#/tracker">← Tracker</a>`}
+  <div class="mod-head"><div class="eyebrow">${out28 ? (n<1?'Before you begin':'Beyond day 28') : 'Day '+n+' of 28'}</div><h1>${isToday?'Today':fmt(d,{weekday:'long',day:'numeric',month:'short'})}</h1>
+    <p class="lede">${isToday?fmt(d):'Small, steady and repeated beats big and occasional.'}</p></div>
+  ${out28 && isToday ? `<div class="note">${n<1?`Your program starts on ${fmt(dateForDay(1))}. You can change the start date on the Program screen.`:`You’ve finished the four weeks. Keep your rhythm going and follow <a href="#/m/11">your 90-day plan</a>.`}</div>`:''}
+  <h2>Daily rhythm</h2>
+  <div class="card">
+    ${check(p+'am', 'Morning check-in', '15 min · arrive, body scan, breath, journal')}
+    ${area(p+'am.note', 'What’s here in me this morning?', 'prompt')}
+  </div>
+  <div class="card">
+    ${check(p+'pm', 'Evening wind-down', '5 min · three moments, set one thing down, five slow breaths')}
+    ${area(p+'pm.moments', 'Three moments from today')}
+    ${area(p+'pm.setdown', 'One thing I’m ready to set down tonight')}
+  </div>
+  ${habits.length?`<h2>Keystone habits</h2><div class="card">${habits.map(i=>check(p+'habit.'+i, esc(get('habit.'+i+'.will')), 'After I '+esc(get('habit.'+i+'.after')||'…'))).join('')}</div>`:''}
+  <h2>Daily log</h2>
+  <div class="card">
+    <div class="field"><label>Mood</label>${scale(p+'mood','1 very low','5 very good')}</div>
+    <div class="field"><label>Energy</label>${scale(p+'energy','1 empty','5 full')}</div>
+    <div class="grid2"><div class="field"><label for="${p}sleep">Sleep (hours)</label><input id="${p}sleep" type="number" inputmode="decimal" step="0.5" min="0" max="24" data-k="${p}sleep" value="${esc(get(p+'sleep'))}"></div>
+      <div class="field" style="align-self:end">${check(p+'rest','Felt restful')}</div></div>
+    ${area(p+'insight', 'Insight: one sentence about anything you noticed or understood')}
+  </div>
+  <p class="small muted" style="text-align:center">Struggling? <a href="#/help">Back to ground and crisis lines</a></p>`;
+}
+
+function vTracker(){
+  const dn = dayNum(), wk = +(sessionStorage.getItem('trkWeek') || Math.min(4, Math.max(1, Math.ceil(dn/7))));
+  const days = Array.from({length:7},(_,i)=>(wk-1)*7+i+1);
+  const logged = n => ['mood','energy','sleep','insight','am','pm'].some(f=>get('d'+n+'.'+f));
+  const total = Array.from({length:28},(_,i)=>i+1).filter(logged).length;
+  const avg = f => { const v = days.map(n=>+get('d'+n+'.'+f)).filter(Boolean); return v.length ? (v.reduce((a,b)=>a+b,0)/v.length).toFixed(1) : '–'; };
+  return `<div class="mod-head"><div class="eyebrow">Module 5 · Tracking what matters</div><h1>28-day tracker</h1><p class="lede">${total} of 28 days logged. Tap a day to log or edit it.</p></div>
+  <div class="tabs" role="tablist">${[1,2,3,4].map(w=>`<button type="button" data-week="${w}" class="${w===wk?'on':''}">Week ${w}</button>`).join('')}</div>
+  <div class="days">${days.map(n=>{const d=dateForDay(n); return `<a class="day ${logged(n)?'logged':''} ${n===dn?'today':''}" href="#/day/${n}" aria-label="Day ${n}"><span class="muted">${fmt(d,{weekday:'short'})}</span><b>${n}</b>
+     <span class="pips">${get('d'+n+'.am')?'<i></i>':''}${get('d'+n+'.pm')?'<i></i>':''}</span></a>`;}).join('')}</div>
+  <div class="stats"><div class="stat"><b>${avg('mood')}</b><span>avg mood</span></div><div class="stat"><b>${avg('energy')}</b><span>avg energy</span></div><div class="stat"><b>${avg('sleep')}</b><span>avg sleep hrs</span></div></div>
+  <div class="card small">${days.map(n=>{const ins=get('d'+n+'.insight'); return ins?`<p><b>Day ${n}.</b> ${esc(ins)}</p>`:'';}).join('') || '<span class="muted">Your daily insights for this week will appear here.</span>'}</div>
+  <h2>Week ${wk} review</h2>
+  <div class="card">${REVIEW.map((q,i)=>area('rev.w'+wk+'.'+i, '— '+q, 'prompt')).join('')}</div>`;
+}
+
+function vHelp(){
+  const steps = MODULES[5].blocks.find(b=>b.id==='ground');
+  const hasPlan = [0,1,2,3,4].some(i=>get('safety.'+i));
+  return `<div class="mod-head"><div class="eyebrow">Support</div><h1>When it gets hard</h1><p class="lede">Hard days are part of integration. They aren’t a sign you’ve done it wrong.</p></div>
+  ${crisisCard()}
+  ${block(MODULES[5].blocks[2])}
+  ${block(steps)}
+  <div class="card"><h3>My safety plan</h3>${hasPlan ? ['My early warning signs','Things that help me settle','People I can call','My GP or psychologist','A safe place I can go'].map((l,i)=>get('safety.'+i)?`<p><b>${l}:</b><br>${esc(get('safety.'+i)).replace(/\n/g,'<br>')}</p>`:'').join('') : '<p class="muted">You haven’t written your safety plan yet.</p>'}
+    <a class="btn" href="#/m/6">${hasPlan?'Edit':'Write'} my safety plan</a></div>
+  ${get('m3.map.0')||get('m3.map.1')?`<div class="card"><h3>My support people</h3>${[0,1,2].map(i=>get('m3.map.'+i)?`<p>${esc(get('m3.map.'+i))}</p>`:'').join('')}</div>`:''}
+  <p class="foot">This is integration support. It is not therapy, medical advice or supply.</p>`;
+}
+
+/* ---------- Install prompt ---------- */
+let deferredPrompt = null;
+window.addEventListener('beforeinstallprompt', e => { e.preventDefault(); deferredPrompt = e; if (route().v==='home') render(); });
+const standalone = () => window.matchMedia('(display-mode: standalone)').matches || navigator.standalone;
+function installBanner(){
+  if (standalone() || sessionStorage.getItem('hideInstall')) return '';
+  const ios = /iphone|ipad|ipod/i.test(navigator.userAgent) || (navigator.platform==='MacIntel' && navigator.maxTouchPoints>1);
+  let msg = '';
+  if (deferredPrompt) msg = `<p><b>Add this to your home screen</b> so it opens like an app and works offline.</p><div class="btns"><button class="btn primary" data-act="install">Install</button></div>`;
+  else if (ios) msg = `<p><b>Add this to your home screen:</b> tap the Share button <span aria-hidden="true">⬆︎</span> in Safari, then “Add to Home Screen”. Always open it from that icon so your notes stay together.</p>`;
+  else msg = `<p><b>Add this to your home screen</b> from your browser menu (⋮ then “Add to Home screen” or “Install app”).</p>`;
+  return `<div class="install"><div style="flex:1">${msg}</div><button class="x" data-act="hideInstall" aria-label="Dismiss">×</button></div>`;
+}
+
+/* ---------- Router ---------- */
+function route(){
+  const h = location.hash.replace(/^#\/?/, '');
+  if (h.startsWith('m/')) return {v:'module', id:+h.slice(2)};
+  if (h.startsWith('day/')) return {v:'day', n:+h.slice(4)};
+  if (h === 'today') return {v:'today'};
+  if (h === 'tracker') return {v:'tracker'};
+  if (h === 'help') return {v:'help'};
+  return {v:'home'};
+}
+function render(keepScroll){
+  const r = route(), app = document.getElementById('app'), y = scrollY;
+  app.innerHTML = r.v==='module' ? vModule(r.id) : r.v==='today' ? vDay(dayNum(), true) : r.v==='day' ? vDay(r.n, false)
+    : r.v==='tracker' ? vTracker() : r.v==='help' ? vHelp() : vHome();
+  const tab = {module:'home', day:'tracker'}[r.v] || r.v;
+  document.querySelectorAll('nav.tabbar a').forEach(a => a.classList.toggle('on', a.dataset.tab===tab));
+  app.querySelectorAll('textarea').forEach(grow);
+  if (keepScroll) scrollTo(0, y);
+}
+window.addEventListener('hashchange', () => { render(); scrollTo(0,0); });
+
+/* ---------- Interaction ---------- */
+function grow(t){ t.style.height = 'auto'; t.style.height = t.scrollHeight + 2 + 'px'; }
+document.addEventListener('input', e => {
+  const k = e.target.dataset.k; if (!k) return;
+  if (e.target.type === 'checkbox') return;
+  if (e.target.tagName === 'TEXTAREA') grow(e.target);
+  set(k, e.target.value);
+});
+document.addEventListener('change', e => {
+  const k = e.target.dataset.k; if (!k) return;
+  if (e.target.type === 'checkbox') { set(k, e.target.checked); if (k.startsWith('done.') || k.startsWith('p.')) render(true); }
+  if (k === 'start') { if (!e.target.value) { S.start = todayISO(); } persist(); render(true); }
+});
+document.addEventListener('click', e => {
+  const b = e.target.closest('button'); if (!b) return;
+  if (b.dataset.week) { sessionStorage.setItem('trkWeek', b.dataset.week); render(true); return; }
+  if (b.dataset.k && b.dataset.v) { set(b.dataset.k, get(b.dataset.k)===b.dataset.v ? '' : b.dataset.v); render(true); return; }
+  const act = b.dataset.act;
+  if (act === 'hideInstall') { sessionStorage.setItem('hideInstall', 1); render(true); }
+  if (act === 'install' && deferredPrompt) { deferredPrompt.prompt(); deferredPrompt.userChoice.finally(() => { deferredPrompt = null; render(true); }); }
+  if (act === 'export') exportData();
+  if (act === 'import') importData();
+  if (act === 'reset' && confirm('Clear everything you’ve written and ticked on this device? This can’t be undone unless you have a backup.')) {
+    S = {start: todayISO()}; persist(); render();
+  }
+});
+
+function exportData(){
+  const blob = new Blob([JSON.stringify({app:'coming-down-to-earth', saved:new Date().toISOString(), data:S}, null, 1)], {type:'application/json'});
+  const name = 'coming-down-to-earth-backup-' + todayISO() + '.json';
+  const file = new File([blob], name, {type:'application/json'});
+  if (navigator.canShare && navigator.canShare({files:[file]})) { navigator.share({files:[file], title:'Coming Down to Earth backup'}).catch(()=>{}); return; }
+  const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = name; a.click(); setTimeout(() => URL.revokeObjectURL(a.href), 2000);
+}
+function importData(){
+  const inp = document.createElement('input'); inp.type = 'file'; inp.accept = '.json,application/json';
+  inp.onchange = () => { const f = inp.files[0]; if (!f) return; f.text().then(t => {
+    try { const j = JSON.parse(t); if (j.app !== 'coming-down-to-earth' || typeof j.data !== 'object') throw 0;
+      if (!confirm('Replace what’s on this device with the backup from ' + new Date(j.saved).toLocaleDateString('en-AU') + '?')) return;
+      S = j.data; persist(); render(); } catch(e) { alert('That file doesn’t look like a Coming Down to Earth backup.'); }
+  }); };
+  inp.click();
+}
+
+render();
+if ('serviceWorker' in navigator && location.protocol !== 'file:') navigator.serviceWorker.register('sw.js').catch(()=>{});
+</script>
+</body>
+</html>
